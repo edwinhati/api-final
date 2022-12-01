@@ -16,3 +16,20 @@ exports.name = (req, res) => {
     }
   });
 };
+exports.residence = (req, res) => {
+  var noreg = req.params.noreg;
+  noreg.toUpperCase();
+
+  get(child(ref(getDatabase()), `residence/${noreg}`)).then(async (snapshot) => {
+    if (snapshot.exists()) {
+      res.json({
+        residence: snapshot.val(),
+      });
+    } else {
+      res.json({
+        residence: "Not Found",
+      });
+    }
+  });
+
+};
